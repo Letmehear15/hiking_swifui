@@ -37,12 +37,12 @@ struct MotionAnimationView: View {
                 Circle()
                     .foregroundStyle(.white)
                     .opacity(0.25)
-                    .frame(width: getRandomFrame(), height: getRandomFrame())
+                    .frame(width: getRandomFrame())
                     .position(x: getRandomCoords(), y: getRandomCoords())
                     .scaleEffect(isAnimation ? getRandomScale() : 1)
                     .onAppear(perform: {
                         withAnimation(
-                            .interpolatingSpring(stiffness: 0.25, damping: 0.25 )
+                            .interpolatingSpring(stiffness: 0.25, damping: 0.25)
                             .repeatForever()
                             .speed(getRandomSpeed())
                             .delay(getRandomDelay())
@@ -67,3 +67,4 @@ struct MotionAnimationView: View {
         MotionAnimationView()
     }
 }
+

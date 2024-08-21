@@ -25,10 +25,10 @@ struct CircleView: View {
                         endPoint: isAnimating ? .bottomTrailing : .topTrailing
                     )
                 )
-                .onAppear{
-                    withAnimation(.interpolatingSpring(stiffness: 0.25, damping: 0.50).repeatForever(autoreverses: true)){
-                        isAnimating.toggle()
-                    }
+                .onAppear {
+                  withAnimation(.linear(duration: 3.0).repeatForever(autoreverses: true)) {
+                      isAnimating.toggle()
+                  }
                 }
             
             MotionAnimationView()
