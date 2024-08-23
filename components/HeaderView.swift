@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @State private var isDrawerOpen = false
+    
     var body: some View {
         VStack(alignment: .leading){
             
@@ -22,10 +24,12 @@ struct HeaderView: View {
                 Spacer()
                 
                 Button(action: {
-                    print("Dorou")
+                    isDrawerOpen.toggle()
                 }, label: {
                     HikeButton()
-                })
+                }).sheet(isPresented: $isDrawerOpen){
+                    DrawerView().presentationDragIndicator(.visible).presentationDetents([.medium, .large])
+                }
 
             }
             Text("Fun and enjoyable outdoor activity for friends and families.")
