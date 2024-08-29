@@ -16,6 +16,16 @@ extension Image {
 }
 
 struct DrawerView: View {
+    
+    private let appIcons = [
+        "AppIcon-Backpack",
+        "AppIcon-Camera",
+        "AppIcon-Campfire",
+        "AppIcon-MagnifyingGlass",
+        "AppIcon-Map",
+        "AppIcon-Mushroom"
+    ]
+    
     var body: some View {
         List{
             Section {
@@ -64,6 +74,62 @@ struct DrawerView: View {
             }
             .listRowSeparator(.hidden)
             .frame(maxWidth: .infinity)
+            
+            Section(header: Text("Alternate icons")){
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(spacing: 11){
+                        ForEach(appIcons.indices, id: \.self){icon in
+                            Button(action: {
+                                UIApplication.shared.setAlternateIconName("\(appIcons[icon])")
+                            }, label: {
+                                Image("\(appIcons[icon])-Preview")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 70, height: 70)
+                                    .cornerRadius(10)
+                            })
+                            .buttonStyle(.borderless)
+                        }
+                    }
+                    
+                }
+                .padding(.top, 12)
+                
+                Text("Choose your favorite app iconfrom the collection above.")
+                    .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 12)
+            }
+            .listRowSeparator(.hidden)
+            
+            
+            Section {
+                CustomLabeledContent(valueText: "Hike", labelText: "Application", labelIcon: "apps.iphone", iconBackgroundColor: .blue)
+                
+                CustomLabeledContent(valueText: "iOS, iPadOS", labelText: "Compatibility", labelIcon: "info.circle", iconBackgroundColor: .red)
+                
+                CustomLabeledContent(valueText: "Swift", labelText: "Technology", labelIcon: "swift", iconBackgroundColor: .orange)
+                
+                CustomLabeledContent(valueText: "1.0", labelText: "Version", labelIcon: "gear", iconBackgroundColor: .purple)
+                
+                CustomLabeledContent(valueText: "Alex Nesterov", labelText: "Developer", labelIcon: "ellipsis.curlybraces", iconBackgroundColor: .cyan)
+                
+                
+                CustomLabeledContent(valueText: "Alex Nesterov", labelText: "Designer", labelIcon: "paintpalette", iconBackgroundColor: .pink)
+                
+                CustomLabeledContent(valueText: "https://google.com", labelText: "Web site", linkText: "Google", labelIcon: "globe", iconBackgroundColor: .indigo, isUrl: true)
+                
+            } header: {
+                Text("ABOUT THE APP")
+            } footer: {
+                HStack{
+                    Spacer()
+                    Text("Copyright © All right reserved.")
+                    Spacer()
+                }.padding(.top)
+            }
         }
     }
 }
